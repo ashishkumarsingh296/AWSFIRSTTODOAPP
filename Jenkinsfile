@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/ashishkumarsingh296/aws-springboot-app.git'
+               git url: 'https://github.com/ashishkumarsingh296/ws-springboot-app.git', credentialsId: 'GITHUB-CREDS'
             }
         }
 
