@@ -75,7 +75,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_SSH_CREDENTIALS = 'aws-ssh-key'  
+        // AWS_SSH_CREDENTIALS = 'aws-ssh-key'  
         AWS_HOST = 'ec2-3-111-36-66.ap-south-1.compute.amazonaws.com'
         APP_NAME = 'AWSFIRSTTODOAPP-0.0.1-SNAPSHOT.jar'  
         APP_DIR = '/home/ubuntu/app'  
