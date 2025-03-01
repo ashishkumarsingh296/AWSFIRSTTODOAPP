@@ -51,7 +51,7 @@ pipeline {
         AWS_SSH_CREDENTIALS = 'aws-ssh-key'  // Set this in Jenkins credentials
         AWS_HOST = 'ec2-3-111-36-66.ap-south-1.compute.amazonaws.com'  // Replace with your EC2 Public DNS
         APP_NAME = 'AWSFIRSTTODOAPP-0.0.1-SNAPSHOT.jar'  // JAR name
-        APP_DIR = '/home/ubuntu/app'  // Directory on EC2
+        APP_DIR = '/home/ubuntu/AWSFIRSTTODOAPP'  // Directory on EC2
     }
 
     tools {
