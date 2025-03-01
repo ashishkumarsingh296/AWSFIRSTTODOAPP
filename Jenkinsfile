@@ -70,25 +70,68 @@
 
 
 
-
 pipeline {
     agent any
 
-    environment {
-        // AWS_SSH_CREDENTIALS = 'aws-ssh-key'  
-        AWS_HOST = 'ec2-3-111-36-66.ap-south-1.compute.amazonaws.com'
-        APP_NAME = 'AWSFIRSTTODOAPP-0.0.1-SNAPSHOT.jar'  
-        APP_DIR = '/home/ubuntu/app'  
+    tools {
+        // jdk 'JDK-21'
+        maven 'Maven'
     }
 
     stages {
-        stage('Checkout Code') {
+
+     stage('Checkout') {
+                steps {
+                    git branch: 'master',
+                        url: 'https://github.com/ashishkumarsingh296/AWSFIRSTTODOAPP.git',
+                        credentialsId: 'GITHUB-CREDS'
+                }
+            }
+       
+
+//         stage('Checkout') {
+//                 // Step 1: Checkout Latest Codde
+//                         steps {
+//                             git url: 'https://github.com/ashishkumarsingh296/SpringBootfullcourseapp.git', credentialsId: 'GITHUB-CREDS'
+//                         }
+//                     }
+//         }
+
+        stage('Build') {
             steps {
-                git branch: 'master', 
-                    url: 'https://github.com/ashishkumarsingh296/ws-springboot-app.git', 
-                    credentialsId: 'GITHUB-CREDS'
+                bat 'mvn clean package'
+            }
+        }
+
+        // stage('Test & Coverage') {
+        //     steps {
+        //         bat 'mvn test jacoco:report'
+        //     }
+        // }
+
+        // stage('Publish Coverage Report') {
+        //     steps {
+        //         publishHTML(target: [
+        //             reportDir: 'target/site/jacoco',
+        //             reportFiles: 'index.html',
+        //             reportName: 'JaCoCo Code Coverage Report'
+        //         ])
+        //     }
+        // }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
             }
         }
     }
-}
 
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
